@@ -106,14 +106,18 @@ Double.SIZE/8 байт;
             Double[][] graphicsData = new Double[in.available() / (Double.SIZE / 8) / 2][];
 // Шаг 3 - Цикл чтения данных (пока в потоке есть данные)
             int i = 0;
+            PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
             while (in.available() > 0) {
 // Первой из потока читается координата точки X
                 Double x = in.readDouble();
+                writer.write(String.valueOf(x));
 // Затем - значение графика Y в точке X
                 Double y = in.readDouble();
+                writer.write(String.valueOf(y));
 // Прочитанная пара координат добавляется в массив
                 graphicsData[i++] = new Double[]{x, y};
             }
+            writer.close();
 // Шаг 4 - Проверка, имеется ли в списке в результате чтения хотя бы одна пара координат
             if (graphicsData != null && graphicsData.length > 0) {
 // Да - установить флаг загруженности данных
